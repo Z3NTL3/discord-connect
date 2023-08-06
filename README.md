@@ -2,7 +2,7 @@
 Implements Discord OAUTH2 within ease. **OOP-like API!**
 
 ### Explore API
-<a href="https://pkg.go.dev/github.com/Z3NTL3/discord-connect">Documentation</a>
+<a href="https://pkg.go.dev/github.com/Z3NTL3/discord-connect@v1.1.0">Documentation</a>
 
 #### Download
 ``go get github.com/Z3NTL3/discord-connect``

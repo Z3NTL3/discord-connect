@@ -33,7 +33,7 @@ type (
 		Redirect_uri string `redirect_uri`
 	}
 
-	client struct {
+	Client struct {
 		rawReq *request.Request
 		app_ctx *AppContext
 	}
@@ -52,8 +52,8 @@ type (
 
 
 // Initializes the client
-func Initialize(timeout time.Duration, appCtx AppContext) *client {
-	client := &client{
+func Initialize(timeout time.Duration, appCtx AppContext) *Client {
+	client := &Client{
 		app_ctx: &appCtx,
 		rawReq: request.New().
 		AddHeader(map[string]string{
@@ -71,12 +71,12 @@ func Initialize(timeout time.Duration, appCtx AppContext) *client {
 
 // Sets the obtained 'authorization_code' for the client as defined by Discord.
 // Ref: https://discord.com/developers/docs/topics/oauth2#authorization-code-grant-authorization-url-example
-func (c *client) SetCode(code string) {
+func (c *Client) SetCode(code string) {
 	c.app_ctx.Code = code
 }
 
 // Sets proxy, this proxy will be used while perfoming OAUTH2 tasks.
-func (c *client) SetProxy(proxy string) (error) {
+func (c *Client) SetProxy(proxy string) (error) {
 	uri, err := url.Parse(proxy); if err != nil {
 		return err
 	}
@@ -87,11 +87,11 @@ func (c *client) SetProxy(proxy string) (error) {
 }
 
 // Delete proxy, so no proxy will be used while perfoming requests towards Discord endpoints
-func(c *client) DelProxy() {
+func(c *Client) DelProxy() {
 	c.rawReq.Ctx().Client.Transport = http.DefaultTransport
 }
 
-func(c *client) Connect() (error, *Response) {
+func(c *Client) Connect() (error, *Response) {
 	payload := make(map[string]string)
 	apiResult := new(Response)
 
